@@ -7,6 +7,7 @@ namespace PSRabbitMq.Consumer
 {
 
     [Cmdlet(VerbsData.ConvertFrom, "RabbitMqDelivery")]
+    [OutputType(typeof(String))]
     public class ConvertFromRabbitMqDeliveryCommand : Cmdlet
     {
         [Parameter(Mandatory=true, ValueFromPipeline=true)]

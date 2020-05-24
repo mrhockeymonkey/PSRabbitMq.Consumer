@@ -8,7 +8,7 @@ using RabbitMQ.Client;
 namespace PSRabbitMq.Consumer.Tests
 {
     [TestFixture]
-    public class RabbitMqConnectionTests
+    public class NewRabbitMqConnectionTests
     {
         Mock<ConnectionFactory> mockConnectionFactory;
         Mock<IConnection> mockConnection;
