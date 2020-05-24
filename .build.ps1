@@ -1,5 +1,7 @@
 $moduleName = 'PSRabbitMq.Consumer'
-$publishDir = Join-Path $BuildRoot "src/$moduleName/bin/Debug/netstandard2.1/publish"
+$moduleDir = Join-Path $BuildRoot "src/$moduleName"
+$moduleTests = Join-Path $BuildRoot "src/$moduleName.Tests"
+$publishDir = Join-Path $moduleDir "/bin/Debug/netstandard2.1/publish"
 $moduleDll = Join-Path $publishDir "$moduleName.dll"
 $modulePsd1 = Join-Path $publishDir "$moduleName.psd1"
 $pidFile = Join-Path $BuildRoot '.pid'
@@ -7,12 +9,12 @@ $pidFile = Join-Path $BuildRoot '.pid'
 task . ClosePSCore,BuildModule,RunPSCore
 
 $buildModuleParams = @{
-    Inputs = {Get-ChildItem "src/$moduleName/*.cs", "src/$moduleName/$moduleName.csproj", "src/$moduleName/$moduleName.psd1"}
+    Inputs = {Get-ChildItem "$moduleDir/*.cs", "$moduleDir/$moduleName.csproj", "$moduleDir/$moduleName.psd1"}
     Outputs = $moduleDll
 }
 
 task BuildModule @buildModuleParams {
-    exec { dotnet publish "src/$moduleName"}
+    exec { dotnet publish "$moduleDir"}
 }
 
 
@@ -36,4 +38,8 @@ task ClosePSCore {
     Get-Content $pidFile -ErrorAction SilentlyContinue | ForEach-Object {
         Stop-Process -Id $_ -ErrorAction SilentlyContinue
     }
+}
+
+task UnitTest {
+    exec { dotnet test $moduleTests}
 }

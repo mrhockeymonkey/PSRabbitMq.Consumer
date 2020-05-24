@@ -10,7 +10,7 @@ namespace PSRabbitMq.Consumer
     public class ConvertFromRabbitMqDeliveryCommand : Cmdlet
     {
         [Parameter(Mandatory=true, ValueFromPipeline=true)]
-        public BasicDeliverEventArgs InputObject;
+        public BasicDeliverEventArgs InputObject { get; set; }
 
         protected override void ProcessRecord()
         {

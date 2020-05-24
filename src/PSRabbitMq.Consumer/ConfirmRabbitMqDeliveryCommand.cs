@@ -12,19 +12,19 @@ namespace PSRabbitMq.Consumer
     public class ConfirmRabbitMqDeliveryCommand : Cmdlet
     {
         [Parameter(Mandatory=true, ValueFromPipeline=true)]
-        public BasicDeliverEventArgs InputObject;
+        public BasicDeliverEventArgs InputObject { get; set; }
 
         [Parameter(Mandatory=true)]
-        public IModel Channel;
+        public IModel Channel { get; set; }
 
         [Parameter(ParameterSetName="Ack")]
-        public SwitchParameter Ack;
+        public SwitchParameter Ack { get; set; }
 
         [Parameter(ParameterSetName="Nack")]
-        public SwitchParameter Nack;
+        public SwitchParameter Nack { get; set; }
 
         [Parameter(ParameterSetName="Nack")]
-        public SwitchParameter Requeue;
+        public SwitchParameter Requeue { get; set; }
 
         private const bool Multiple = false;
 

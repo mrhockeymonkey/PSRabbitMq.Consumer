@@ -18,6 +18,9 @@ namespace PSRabbitMq.Consumer.Tests
         {
             mockConnectionFactory = new Mock<ConnectionFactory>();
             mockConnection = new Mock<IConnection>();
+
+            mockConnection.Setup(x => x.IsOpen).Returns(true);
+            mockConnectionFactory.Setup(x => x.CreateConnection()).Returns(mockConnection.Object);
         }
 
         [Test]
@@ -33,21 +36,17 @@ namespace PSRabbitMq.Consumer.Tests
         }
 
         [Test]
-        public void NewRabbitMqConnectionCommand_PropertiesHaveParameterAttribute()
+        public void NewRabbitMqConnectionCommand_HasCorrectParameters()
         {
             // Arrange
-            var cmdletType = typeof(NewRabbitMqConnectionCommand);
+            var cmdlet = new NewRabbitMqConnectionCommand();
             var expectedParameters = new List<String> {"HostName", "Port", "VirtualHost", "UserName", "Password"};
             
+            // Act
             foreach (var parameter in expectedParameters)
             {
-                // Act
-                var property = cmdletType.GetProperty(parameter);
-                var hasParameterAttribute = Attribute.IsDefined(property, typeof(ParameterAttribute));
-
                 // Assert.
-                Assert.That(property, Is.Not.Null);
-                Assert.That(hasParameterAttribute, Is.True);
+                Assert.That(TestHelpers.HasParameterAttribute(cmdlet, parameter), Is.True);
             }
         }
 
@@ -55,8 +54,6 @@ namespace PSRabbitMq.Consumer.Tests
         public void NewRabbitMqConnectionCommand_ReturnsNewConnection()
         {
             // Arrange
-            mockConnection.Setup(x => x.IsOpen).Returns(true);
-            mockConnectionFactory.Setup(x => x.CreateConnection()).Returns(mockConnection.Object);
             var cmdlet = new NewRabbitMqConnectionCommand(mockConnectionFactory.Object);
 
             // Act
@@ -97,7 +94,9 @@ namespace PSRabbitMq.Consumer.Tests
             };
 
             // Act
-            var invoked = cmdlet.Invoke().GetEnumerator().MoveNext();
+            var enumerator = cmdlet.Invoke().GetEnumerator();
+            enumerator.MoveNext();
+            var result = enumerator.Current;
 
             // Assert
             Assert.That(cmdlet.HostName, Is.EqualTo("someHost"));

@@ -21,7 +21,7 @@ namespace PSRabbitMq.Consumer
         public bool Global { get; set; } = false;
 
         [Parameter()]
-        public SwitchParameter PassThru;
+        public SwitchParameter PassThru { get; set; }
 
         protected override void EndProcessing()
         {
