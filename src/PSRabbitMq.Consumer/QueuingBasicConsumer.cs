@@ -10,7 +10,7 @@ namespace PSRabbitMq.Consumer
 
     public class QueueingBasicConsumer : DefaultBasicConsumer
     {
-        public Queue<BasicDeliverEventArgs> Queue = new Queue<BasicDeliverEventArgs>();
+        public Queue<BasicDeliverEventArgs> Queue { get; set; } = new Queue<BasicDeliverEventArgs>();
 
         public QueueingBasicConsumer(IModel model) : base(model)
         {

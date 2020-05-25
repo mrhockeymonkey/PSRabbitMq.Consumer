@@ -19,22 +19,18 @@ namespace PSRabbitMq.Consumer
         public bool AutoAck { get; set; } = false;
 
         [Parameter()]
-        public String Tag { get; set; } = "";
+        public String Tag { get; set; } = String.Empty;
 
         [Parameter()]
         public bool NoLocal { get; set; } = false;
 
         [Parameter()]
-        public bool Exclusive { get; set; }= false;
+        public bool Exclusive { get; set; } = false;
 
         [Parameter()]
         public IDictionary<String,Object> Arguments { get; set; } = null;
 
         private QueueingBasicConsumer Consumer;
-
-        public StartRabbitMqConsumerCommand(){}
-
-        public StartRabbitMqConsumerCommand(IModel channel) => Channel = channel;
 
         protected override void EndProcessing()
         {
