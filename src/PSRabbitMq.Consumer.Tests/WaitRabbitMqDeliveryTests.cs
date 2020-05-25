@@ -29,7 +29,7 @@ namespace PSRabbitMq.Consumer.Tests
         }
 
         [TestCase("Consumer")]
-        [TestCase("WaitIntervalSeconds")]
+        [TestCase("WaitIntervalSecondss")]
         public void WaitRabbitMqDeliveryCommand_HasCorrectParameters(String parameter)
         {
             // Arrange
