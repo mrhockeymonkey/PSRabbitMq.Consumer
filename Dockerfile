@@ -10,6 +10,7 @@ RUN pwsh -Command " \
     Install-Module PSRabbitMq -RequiredVersion 0.3.3 -Force; \
     "
 
-ENTRYPOINT ["pwsh"]
+WORKDIR /tmp/build
+ENTRYPOINT ["pwsh", "-Command"]
 
 
