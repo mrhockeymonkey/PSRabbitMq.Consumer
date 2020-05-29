@@ -19,7 +19,7 @@ jobs:
       run: docker build . --file Dockerfile --tag ps
 
     - name: Run Unit Tests
-      run: docker run -it -v $(pwd):/tmp/build ps invoke-build unittest
+      run: docker run -i -v $(pwd):/tmp/build ps invoke-build unittest
 
     - name: list
       run: pwd && ls -la
