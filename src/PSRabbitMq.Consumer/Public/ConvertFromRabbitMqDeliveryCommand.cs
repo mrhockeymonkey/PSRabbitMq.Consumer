@@ -3,7 +3,7 @@ using System.Management.Automation;
 using System.Text;
 using RabbitMQ.Client.Events;
 
-namespace PSRabbitMq.Consumer
+namespace PSRabbitMq.Consumer.Public
 {
 
     [Cmdlet(VerbsData.ConvertFrom, "RabbitMqDelivery")]

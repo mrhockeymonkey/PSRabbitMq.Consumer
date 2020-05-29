@@ -6,7 +6,7 @@ using System.Threading;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace PSRabbitMq.Consumer
+namespace PSRabbitMq.Consumer.Public
 {
     [Cmdlet(VerbsLifecycle.Confirm, "RabbitMqDelivery")]
     public class ConfirmRabbitMqDeliveryCommand : Cmdlet

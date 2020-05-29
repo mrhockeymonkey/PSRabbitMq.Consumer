@@ -2,7 +2,7 @@
 using System.Management.Automation;
 using RabbitMQ.Client;
 
-namespace PSRabbitMq.Consumer
+namespace PSRabbitMq.Consumer.Public
 {
     [Cmdlet(VerbsCommon.New, "RabbitMqConnection")]
     [OutputType(typeof(IConnection))]

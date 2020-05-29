@@ -4,11 +4,12 @@ using NUnit.Framework;
 using Moq;
 using System.Management.Automation;
 using RabbitMQ.Client;
+using PSRabbitMq.Consumer.Public;
 
-namespace PSRabbitMq.Consumer.Tests
+namespace PSRabbitMq.Consumer.Tests.Public
 {
     [TestFixture]
-    public class NewRabbitMqChannelTests
+    public class WaitRabbitMqDeliveryTests
     {
         [SetUp]
         public void Setup()
@@ -17,10 +18,10 @@ namespace PSRabbitMq.Consumer.Tests
         }
 
         [Test]
-        public void NewRabbitMqChannelCommand_IsCmdlet()
+        public void WaitRabbitMqDeliveryCommand_IsCmdlet()
         {
             // Arrange
-            var cmdlet = new NewRabbitMqChannelCommand();
+            var cmdlet = new WaitRabbitMqDeliveryCommand();
 
             // Act
 
@@ -28,11 +29,12 @@ namespace PSRabbitMq.Consumer.Tests
             Assert.That(cmdlet is Cmdlet, Is.True);
         }
 
-        [TestCase("Connection")]
-        public void NewRabbitMqChannelCommand_HasCorrectParameters(String parameter)
+        [TestCase("Consumer")]
+        [TestCase("WaitIntervalSeconds")]
+        public void WaitRabbitMqDeliveryCommand_HasCorrectParameters(String parameter)
         {
             // Arrange
-            var cmdlet = new NewRabbitMqChannelCommand();
+            var cmdlet = new WaitRabbitMqDeliveryCommand();
 
             // Act
 

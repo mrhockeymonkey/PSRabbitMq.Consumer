@@ -3,7 +3,7 @@ using System.Management.Automation;
 using System.Threading;
 using RabbitMQ.Client.Events;
 
-namespace PSRabbitMq.Consumer
+namespace PSRabbitMq.Consumer.Public
 {
     
     [Cmdlet(VerbsLifecycle.Wait, "RabbitMqDelivery")]

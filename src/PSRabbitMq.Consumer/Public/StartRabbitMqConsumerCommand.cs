@@ -3,7 +3,7 @@ using System.Management.Automation;
 using System.Collections.Generic;
 using RabbitMQ.Client;
 
-namespace PSRabbitMq.Consumer
+namespace PSRabbitMq.Consumer.Public
 {
     [Cmdlet(VerbsLifecycle.Start, "RabbitMqConsumer")]
     [OutputType(typeof(QueueingBasicConsumer))]

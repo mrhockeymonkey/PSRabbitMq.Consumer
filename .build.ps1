@@ -7,11 +7,10 @@ $modulePsd1 = Join-Path $publishDir "$moduleName.psd1"
 $pidFile = Join-Path $BuildRoot '.pid'
 $testOutputDir = Join-Path $BuildRoot ".nunit"
 
-task . BuildModule
-#task . ClosePSCore,BuildModule,RunPSCore
+task . ClosePSCore,BuildModule,RunPSCore
 
 $buildModuleParams = @{
-    Inputs = {Get-ChildItem "$moduleDir/*.cs", "$moduleDir/$moduleName.csproj", "$moduleDir/$moduleName.psd1"}
+    Inputs = {(Get-ChildItem "$moduleDir/*.cs" -Recurse) + (Get-ChildItem "$moduleDir/$moduleName.csproj", "$moduleDir/$moduleName.psd1")}
     Outputs = $moduleDll
 }
 
