@@ -5,11 +5,12 @@ $publishDir = Join-Path $moduleDir "/bin/Debug/netstandard2.1/publish"
 $moduleDll = Join-Path $publishDir "$moduleName.dll"
 $modulePsd1 = Join-Path $publishDir "$moduleName.psd1"
 $pidFile = Join-Path $BuildRoot '.pid'
+$testOutputDir = Join-Path $BuildRoot ".nunit"
 
 task . ClosePSCore,BuildModule,RunPSCore
 
 $buildModuleParams = @{
-    Inputs = {Get-ChildItem "$moduleDir/*.cs", "$moduleDir/$moduleName.csproj", "$moduleDir/$moduleName.psd1"}
+    Inputs = {(Get-ChildItem "$moduleDir/*.cs" -Recurse) + (Get-ChildItem "$moduleDir/$moduleName.csproj", "$moduleDir/$moduleName.psd1")}
     Outputs = $moduleDll
 }
 
@@ -41,5 +42,5 @@ task ClosePSCore {
 }
 
 task UnitTest {
-    exec { dotnet test $moduleTests}
+    exec { dotnet test $moduleTests --test-adapter-path:. --logger:nunit --logger:appveyor }
 }

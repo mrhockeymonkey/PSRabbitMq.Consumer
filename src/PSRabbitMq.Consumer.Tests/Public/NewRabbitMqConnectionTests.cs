@@ -4,8 +4,9 @@ using NUnit.Framework;
 using Moq;
 using System.Management.Automation;
 using RabbitMQ.Client;
+using PSRabbitMq.Consumer.Public;
 
-namespace PSRabbitMq.Consumer.Tests
+namespace PSRabbitMq.Consumer.Tests.Public
 {
     [TestFixture]
     public class NewRabbitMqConnectionTests

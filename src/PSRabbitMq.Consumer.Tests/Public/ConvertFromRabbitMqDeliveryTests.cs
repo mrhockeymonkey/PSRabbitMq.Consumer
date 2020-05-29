@@ -5,8 +5,9 @@ using Moq;
 using System.Management.Automation;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using PSRabbitMq.Consumer.Public;
 
-namespace PSRabbitMq.Consumer.Tests
+namespace PSRabbitMq.Consumer.Tests.Public
 {
     [TestFixture]
     public class ConvertFromRabbitMqDeliveryTests
