@@ -43,5 +43,5 @@ task ClosePSCore {
 }
 
 task UnitTest {
-    exec { dotnet test $moduleTests --test-adapter-path:. --logger:nunit }
+    exec { dotnet test $moduleTests --test-adapter-path:. --logger:nunit --logger:appveyor }
 }
