@@ -5,6 +5,7 @@ $publishDir = Join-Path $moduleDir "/bin/Debug/netstandard2.1/publish"
 $moduleDll = Join-Path $publishDir "$moduleName.dll"
 $modulePsd1 = Join-Path $publishDir "$moduleName.psd1"
 $pidFile = Join-Path $BuildRoot '.pid'
+$testOutputDir = Join-Path $BuildRoot ".nunit"
 
 task . BuildModule
 #task . ClosePSCore,BuildModule,RunPSCore
@@ -42,5 +43,5 @@ task ClosePSCore {
 }
 
 task UnitTest {
-    exec { dotnet test $moduleTests}
+    exec { dotnet test $moduleTests --test-adapter-path:. --logger:nunit }
 }
