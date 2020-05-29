@@ -23,3 +23,9 @@ jobs:
 
     - name: list
       run: pwd && ls -la
+
+    - uses: MirrorNG/nunit-reporter@v1.0.9
+        if: always()
+        with:
+          path: Tests/*.xml
+          access-token: ${{ secrets.GITHUB_TOKEN }}

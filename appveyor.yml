@@ -1,0 +1,8 @@
+image: Ubuntu2004
+
+install: 
+  - ps: Install-Module InvokeBuild -RequiredVersion 5.6.0 -Force
+  - ps: Import-Module InvokeBuild
+
+build_script:
+  - ps: Invoke-Build UnitTest
