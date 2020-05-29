@@ -6,7 +6,8 @@ $moduleDll = Join-Path $publishDir "$moduleName.dll"
 $modulePsd1 = Join-Path $publishDir "$moduleName.psd1"
 $pidFile = Join-Path $BuildRoot '.pid'
 
-task . ClosePSCore,BuildModule,RunPSCore
+task . BuildModule
+#task . ClosePSCore,BuildModule,RunPSCore
 
 $buildModuleParams = @{
     Inputs = {Get-ChildItem "$moduleDir/*.cs", "$moduleDir/$moduleName.csproj", "$moduleDir/$moduleName.psd1"}
