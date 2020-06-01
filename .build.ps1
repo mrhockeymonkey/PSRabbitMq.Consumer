@@ -50,6 +50,6 @@ task ClosePSCore {
     }
 }
 
-task UnitTest {
+task UnitTest ClosePSCore,{
     exec { dotnet test $moduleTests --test-adapter-path:. --logger:nunit --logger:appveyor }
 }

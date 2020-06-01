@@ -15,14 +15,39 @@ namespace PSRabbitMq.Consumer.Public
         [Parameter()]
         public int WaitIntervalSeconds { get; set; } = 1;
 
+        [Parameter()]
+        public int Timeout { get; set; } = 0;
+
         private BasicDeliverEventArgs message;
+        private DateTime idleStart;
 
         public WaitRabbitMqDeliveryCommand() {}
         
         public WaitRabbitMqDeliveryCommand(QueueingBasicConsumer consumer) => Consumer = consumer;
 
+        
+        private void ThrowOnTimeout()
+        {
+            // timeout=0 is equivalent to never timeout
+            if (Timeout == 0)
+            {
+                return;
+            }
+
+            // calculate the seconds passed since beocming idle
+            DateTime idleNow = DateTime.Now;
+            TimeSpan idleDuration = (idleNow - idleStart);
+
+            // throw is idle time has exceeded timeout
+            if (idleDuration.TotalSeconds > Timeout)
+            {
+                throw new TimeoutException();
+            }
+        }
+        
         protected override void EndProcessing()
         {
+            idleStart = DateTime.Now;
             var queueEmpty = false;
             WriteVerbose($"Waiting for delivery with interval of {WaitIntervalSeconds} seconds");
 
@@ -39,12 +64,14 @@ namespace PSRabbitMq.Consumer.Public
                 {
                     if (!queueEmpty)
                     {
-                        this.WriteVerbose("Queue is now empty, waiting for new items...");
+                        this.WriteVerbose("Queue is empty, waiting for new items...");
                         queueEmpty = true;
+                        idleStart = DateTime.Now;
                     }
 
                     WriteDebug($"Sleeping for {WaitIntervalSeconds} seconds");
                     Thread.Sleep(1000 * WaitIntervalSeconds);
+                    ThrowOnTimeout();
                 }
             }
         }
