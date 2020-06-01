@@ -12,10 +12,10 @@
 RootModule = 'PSRabbitMq.Consumer.dll'
 
 # Version number of this module.
-ModuleVersion = '0.0.1'
+ModuleVersion = '0.1.1'
 
 # Supported PSEditions
-# CompatiblePSEditions = @()
+CompatiblePSEditions = @("Core")
 
 # ID used to uniquely identify this module
 GUID = '714d0db8-affb-4d06-9bfa-1b4993223fd8'
@@ -27,7 +27,7 @@ Author = 'Scott Matthews'
 # CompanyName = ''
 
 # Copyright statement for this module
-Copyright = '(c) Scott Matthews. All rights reserved.'
+# Copyright = '(c) Scott Matthews. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'Consume messages from RabbitMQ'
@@ -103,13 +103,13 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+        Tags = @("RabbitMQ")
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = "https://github.com/mrhockeymonkey/PSRabbitMq.Consumer/blob/master/LICENSE"
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = "https://github.com/mrhockeymonkey/PSRabbitMq.Consumer"
 
         # A URL to an icon representing this module.
         # IconUri = ''
