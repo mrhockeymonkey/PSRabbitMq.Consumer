@@ -1,11 +1,16 @@
 <#
     .SYNOPSIS
+    This example demonstrates basic usage including connecting, setting Qos, waiting for messages,
+    converting messages and sending ack/nack.
+
+    .NOTES
     This example assumes you have a local instance of rabbitmq and a queue called "test"
 
     docker run -it -p 5672:5672 -p 15672:15672 rabbitmq:management
 #>
 
 $VerbosePreference = 'Continue'
+$queueName = 'test'
 
 # create a new connection to rabbitmq
 $connection = New-RabbitMqConnection -HostName localhost 
@@ -14,7 +19,7 @@ $connection = New-RabbitMqConnection -HostName localhost
 $channel = New-RabbitMqChannel -Connection $connection | Set-RabbitMqQos -PrefetchCount 5 -Passthru
 
 # start consuming messages from specified queue. Consumer tag is a helpful identifying when running multiple consumers
-$consumer = $channel | Start-RabbitMqConsumer -QueueName 'test' -Tag $env:COMPUTERNAME
+$consumer = $channel | Start-RabbitMqConsumer -QueueName $queueName -Tag $env:COMPUTERNAME
 
 # wait for message to come in and handle each via the pipeline
 $consumer | Wait-RabbitMqDelivery | ForEach-Object {
@@ -40,3 +45,5 @@ $consumer | Wait-RabbitMqDelivery | ForEach-Object {
         $_ | Confirm-RabbitMqDelivery -Channel $channel -Ack
     }
 }
+
+Write-Output "fin."

@@ -1,7 +1,9 @@
 # PSRabbitMq.Consumer
 This module aims to extend [PSRabbitMQ](https://github.com/RamblingCookieMonster/PSRabbitMq) and focuses on consumption of messages only. For configuring rabbitmq and publishing messages I recommend using PSRabbitMQ or other client library.
 
-This module is built for dotnet core and powershell 7.0+ on windows and linux. 
+This module is built for dotnet core and powershell 7.0+ on windows and linux.
+
+Credit to @ramblingcookiemonster for his work on PSRabbitMQ.
 
 ## Usage
 see [examples](./examples) here.
