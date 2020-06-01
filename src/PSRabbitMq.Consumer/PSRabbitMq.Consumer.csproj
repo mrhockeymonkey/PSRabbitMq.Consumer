@@ -9,8 +9,4 @@
     <PackageReference Include="RabbitMQ.Client" Version="5.1.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="PSRabbitMq.Consumer.psd1" CopyToPublishDirectory="Always" />
-  </ItemGroup>
-
 </Project>
