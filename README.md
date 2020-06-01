@@ -3,7 +3,7 @@ This module aims to extend [PSRabbitMQ](https://github.com/RamblingCookieMonster
 
 This module is built for dotnet core and powershell 7.0+ on windows and linux. 
 
-## Example Usage
+## Usage
 see [examples](./examples) here.
 
 ## Contributing
